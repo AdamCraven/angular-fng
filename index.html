@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>nice</title>
+    <script src='./node_modules/angular/angular.js'></script>
+    <script src="./src/fasterNgEventDirectives.js"></script>
+
+</head>
+<body ng-init="yeah = yes">
+
+<test-directive></test-directive>
+
+
+    <script>
+        var am = angular.module('app', [])
+            .config(['$controllerProvider', function($controllerProvider) {
+                $controllerProvider.allowGlobals();
+            }])
+            .controller('appcontroller', function ($scope) {
+                console.log('yo');
+                var evts = 'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste';
+
+                evts.split(' ').forEach(function (evtname) {
+                    this[evtname] = function (e) {
+                        console.log('evt', e, arguments);
+                    };
+                }, this);
+
+
+            })
+            .directive('testDirective', function () {
+                return {
+                    transclude:true,
+                    scope:{},
+                    link: function (scope) {
+                        //console.log('stuff', scope)
+                    },
+                    template: '<input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keydown="ctrl.keydown()" /><div ng-transclude></div>',
+                    controller:'appcontroller as ctrl',
+                }
+            });
+
+        Object.keys(ngEventDirectives).forEach(function (name) {
+            am.directive(name, ngEventDirectives[name]);
+        });
+
+        angular.bootstrap(document, ['app']);
+    </script>
+</body>
+</html>
