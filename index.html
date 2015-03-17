@@ -35,7 +35,7 @@
                     link: function (scope) {
                         //console.log('stuff', scope)
                     },
-                    template: '<input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keydown="ctrl.keydown()" /><div ng-transclude></div>',
+                    template: '<input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keydown="ctrl.keydown()" /><input ng-click="ctrl.focus()" ng-blur="ctrl.blur()" ng-keypress="ctrl.keypress()" ng-keydown="ctrl.keydown()" />',
                     controller:'appcontroller as ctrl',
                 }
             });
