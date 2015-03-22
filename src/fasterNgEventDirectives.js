@@ -68,7 +68,7 @@ var ngEventDirectives = {};
 function scopeToCallDigestIn(scope) {
 	var digestScope = scope;
 	while (digestScope.$parent) {
-		if (scope.$$digestContext) {
+		if (scope.$stopDigestPropagation) {
 			break;
 		} else {
 			digestScope = scope.$parent;
@@ -113,7 +113,7 @@ var forceAsyncEvents = {
 								});
 							} else {
 
-								if (digestScope.$$digestContext) {
+								if (digestScope.$stopDigestPropagation) {
 									callback();
 									digestScope.$digest();
 								} else {
