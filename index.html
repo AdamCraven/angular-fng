@@ -4,15 +4,26 @@
     <title>nice</title>
     <script src='./node_modules/angular/angular.js'></script>
     <script src="./src/fasterNgEventDirectives.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body ng-init="yeah = yes">
 
 <test-directive></test-directive>
 
 
+<style>.pad {padding:15px; margin: 40px;}</style>
+<script id="fng.html" type="text/ng-template">
+
+<div class="pad">
+<span class="label label-danger">ng-event</span>&nbsp;&nbsp;
+<input ng-click="ctrl.focus()" ng-blur="ctrl.blur()" ng-keypress="ctrl.keypress()" ng-keyup="ctrl.keyup()" ng-keydown="ctrl.keydown()" />
+<br /><br />
+<span class="label label-success">fng-event</span>&nbsp;
+<input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keyup="ctrl.keyup()" fng-keydown="ctrl.keydown()" />
+</div>
+</script>
     <script>
-        var am = angular.module('app', [])
+        var am = angular.module('app', ['app5'])
             .config(['$controllerProvider', function($controllerProvider) {
                 $controllerProvider.allowGlobals();
             }])
@@ -33,12 +44,41 @@
                     transclude:true,
                     scope:{},
                     link: function (scope) {
+                        scope.$stopDigestPropagation = true;
                         //console.log('stuff', scope)
                     },
-                    template: '<input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keydown="ctrl.keydown()" /><input ng-click="ctrl.focus()" ng-blur="ctrl.blur()" ng-keypress="ctrl.keypress()" ng-keydown="ctrl.keydown()" />',
+                    templateUrl: 'fng.html',
                     controller:'appcontroller as ctrl',
-                }
+                };
             });
+
+            function noop(x) {
+                //console.log('noop')
+                var a = window.performance.now();
+                var a = 5;
+                var b = 6;
+                var c = 8;
+                var f = c / b;
+                var p = f+b+a;
+                if(x) {
+                    p = p + 2;
+                } else {
+                    p = p;
+                }
+                var b = window.performance.now();
+                return p.toString();
+            }
+
+        angular
+        .module("app5",[])
+        .run(["$rootScope", function(scope) {
+            "use strict";
+            scope.noop = noop;
+            // scope with 50000 watchers on it
+            for (var i = 0; i < 50000; i ++) {
+                scope.$watch('noop()', function n() {});
+            }
+        }]);
 
         Object.keys(ngEventDirectives).forEach(function (name) {
             am.directive(name, ngEventDirectives[name]);
