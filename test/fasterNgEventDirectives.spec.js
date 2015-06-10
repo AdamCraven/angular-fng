@@ -1,4 +1,6 @@
+define(['angular', 'angular-mocks', 'src/fasterNgEventDirectives'], function(angular, angularMocks, fasterNgEventDirectives) {
 'use strict';
+
 
 describe('event directives', function() {
   var element;
@@ -7,6 +9,14 @@ describe('event directives', function() {
   afterEach(function() {
     dealoc(element);
   });
+
+  beforeEach(function () {
+    var mod = angular.module('fng', [])
+
+    fasterNgEventDirectives(mod);
+
+  });
+
 
 
   describe('ngSubmit', function() {
@@ -150,4 +160,5 @@ describe('event directives', function() {
     }));
 
   });
+});
 });

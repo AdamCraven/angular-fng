@@ -1,4 +1,4 @@
-var karma = require('gulp-karma');
+var karma = require('karma').server;
 var gulp = require('gulp');
 
 var testFiles = [
@@ -22,9 +22,8 @@ gulp.task('test', function() {
 });
 
 gulp.task('default', function() {
-  gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
+        karma.start({
+            configFile: __dirname + '/karma.conf.js',
+            action: 'watch'
+        });
 });

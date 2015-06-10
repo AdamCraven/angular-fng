@@ -1,6 +1,5 @@
+define(['angular'], function (angular) {
 'use strict';
-
-
 
 var PREFIX_REGEXP = /^((?:x|data)[\:\-_])/i;
 /**
@@ -127,3 +126,9 @@ var forceAsyncEvents = {
 		}];
 	}
 );
+
+return function fasterNgDirectives(module) {
+	//events.forEach()
+};
+
+});
