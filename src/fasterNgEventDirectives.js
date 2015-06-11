@@ -67,7 +67,7 @@ var ngEventDirectives = {};
 function scopeToCallDigestIn(scope) {
 	var digestScope = scope;
 	while (digestScope.$parent) {
-		if (scope.$stopDigestPropagation) {
+		if (scope.hasOwnProperty('$stopDigestPropagation')) {
 			break;
 		} else {
 			digestScope = scope.$parent;
