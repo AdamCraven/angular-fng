@@ -7,19 +7,18 @@ describe('event directives', function() {
 
 
   afterEach(function() {
-    dealoc(element);
+    //dealoc(element);
   });
 
   beforeEach(function () {
-    var mod = angular.module('fng', [])
-
+    var mod = angular.module('fng', []);
     fasterNgEventDirectives(mod);
-
+    module('fng');
   });
 
 
 
-  describe('ngSubmit', function() {
+  describe('fngSubmit', function() {
 
     it('should get called on form submit', inject(function($rootScope, $compile) {
       element = $compile('<form action="/foo" fng-submit="submitted = true">' +
@@ -32,7 +31,7 @@ describe('event directives', function() {
 
       expect($rootScope.submitted).not.toBeDefined();
 
-      browserTrigger(element.children()[0]);
+      element.children().eq(0).submit();
       expect($rootScope.submitted).toEqual(true);
     }));
 
@@ -53,7 +52,7 @@ describe('event directives', function() {
 
       expect($rootScope.formSubmitted).not.toBeDefined();
 
-      browserTrigger(element.children()[0]);
+      element.children().eq(0).submit();
       expect($rootScope.formSubmitted).toEqual('foo');
     }));
   });
@@ -87,7 +86,7 @@ describe('event directives', function() {
 
     it('should call the listener synchronously inside of $apply if outside of $apply',
         inject(function($rootScope, $compile) {
-      element = $compile('<input type="text" fng-focus="focus()" fng-model="value">')($rootScope);
+      element = $compile('<input type="text" fng-focus="focus()" ng-model="value">')($rootScope);
       $rootScope.focus = jasmine.createSpy('focus').andCallFake(function() {
         $rootScope.value = 'newValue';
       });
@@ -148,7 +147,7 @@ describe('event directives', function() {
 
     it('should call the listener synchronously inside of $apply if outside of $apply',
         inject(function($rootScope, $compile) {
-      element = $compile('<input type="text" fng-blur="blur()" fng-model="value">')($rootScope);
+      element = $compile('<input type="text" fng-blur="blur()" ng-model="value">')($rootScope);
       $rootScope.blur = jasmine.createSpy('blur').andCallFake(function() {
         $rootScope.value = 'newValue';
       });
