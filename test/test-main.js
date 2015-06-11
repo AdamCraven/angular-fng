@@ -14,10 +14,12 @@ requirejs.config({
     paths: {
         'angular': 'node_modules/angular/angular',
         'angular-mocks': 'node_modules/angular-mocks/angular-mocks',
+        'jquery': 'node_modules/jquery/dist/jquery.min',
     },
 
     shim: {
         'angular': {
+            deps: ['jquery'],
             exports: 'angular'
         },
         'angular-mocks': {

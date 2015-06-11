@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular": "1.4.0"
+    "angular": "1.4.0",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
