@@ -112,9 +112,7 @@ describe('event directives', function() {
       element = $compile('<button fng-click="e = $event.target">BTN</button>')(scope);
       expect(function() {
         element.triggerHandler('click');
-      })//.toThrowMinErr(
-              //'$parse', 'isecdom', 'Referencing DOM nodes in Angular expressions is disallowed! ' +
-             // 'Expression: e = $event.target');
+      }).toThrow();
     }));
   });
 
