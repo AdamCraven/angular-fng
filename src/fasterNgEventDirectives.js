@@ -1,3 +1,4 @@
+/*jshint unused:true*/
 define(['angular'], function(angular) {
 	'use strict';
 
@@ -62,7 +63,6 @@ define(['angular'], function(angular) {
 	 * A collection of directives that allows creation of custom event handlers that are defined as
 	 * angular expressions and are compiled and executed within the current scope.
 	 */
-	var ngEventDirectives = {};
 
 	function scopeToCallDigestIn(scope) {
 		var digestScope = scope;
@@ -87,7 +87,7 @@ define(['angular'], function(angular) {
 	return function fasterNgDirectives(module) {
 		function assignDirectives(eventName) {
 			var directiveName = directiveNormalize('fng-' + eventName);
-			module.directive(directiveName, ['$parse', '$rootScope', '$browser', function($parse, $rootScope, $browser) {
+			module.directive(directiveName, ['$parse', '$rootScope', function($parse, $rootScope) {
 				return {
 					restrict: 'A',
 					compile: function($element, attr) {
@@ -107,15 +107,8 @@ define(['angular'], function(angular) {
 								var digestScope = scopeToCallDigestIn(scope);
 
 								if (forceAsyncEvents[eventName] && $rootScope.$$phase) {
-									if (digestScope.$stopDigestPropagation) {
-										$browser.defer(function() {
-											callback();
-											digestScope.digest();
-										});
-									} else {
 										scope.$evalAsync(callback);
-									}
-								} else {
+									} else {
 
 									if (digestScope.$stopDigestPropagation) {
 										callback();

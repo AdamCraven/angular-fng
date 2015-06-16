@@ -236,6 +236,32 @@ define(['angular', 'angular-mocks', 'src/fasterNgEventDirectives'], function(ang
                 expect(greatGrandChildCalled).toHaveBeenCalled();
             }));
 
+            describe('call the listener asynchronously during $apply, fallback to standard digest', function() {
+                function run(scope) {
+                    inject(function($compile) {
+                        element = $compile('<input type="text" fng-blur="blur()">')(scope);
+                        scope.$stopDigestPropagation = true;
+                        scope.blur = jasmine.createSpy('blur');
+
+                        scope.$apply(function() {
+                            element.triggerHandler('blur');
+                            expect(scope.blur).not.toHaveBeenCalled();
+                        });
+
+                        expect(scope.blur).toHaveBeenCalled();
+                    });
+                }
+
+                it('should call the listener with non isolate scopes', inject(function($rootScope) {
+                    run($rootScope.$new());
+                }));
+
+                it('should call the listener with isolate scopes', inject(function($rootScope) {
+                    run($rootScope.$new(true));
+                }));
+
+            });
+
 
         });
     });
