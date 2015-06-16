@@ -67,11 +67,10 @@ define(['angular'], function(angular) {
 	function scopeToCallDigestIn(scope) {
 		var digestScope = scope;
 		while (digestScope.$parent) {
-			if (scope.hasOwnProperty('$stopDigestPropagation')) {
+			if (digestScope.hasOwnProperty('$stopDigestPropagation')) {
 				break;
-			} else {
-				digestScope = scope.$parent;
 			}
+			digestScope = digestScope.$parent;
 		}
 		return digestScope;
 	}
