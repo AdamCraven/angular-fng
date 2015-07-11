@@ -6,8 +6,8 @@ Adds additional event directives that can be digested at a desired scope.
 
 Add $stopDigestPropagation to a scope to prevent rootscope digest
 
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
+<img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
+<img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
 
 
 New directives defined:
