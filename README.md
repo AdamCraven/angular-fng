@@ -1,6 +1,6 @@
 #Faster Default directives for angular
 
-Adds additional event directives that can be digested at a desired scope.
+Faster angular events mimic the functionality of the existing ng-event directives, but have a feature that allows them to be called in a desired scope, rather than trigger a rootScope digest.
 
 ## Usage
 
