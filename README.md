@@ -3,8 +3,12 @@
 Faster angular events mimic the functionality of the existing ng-event directives, but have a feature that allows them to be called in a desired scope, rather than trigger a rootScope digest.
 
 
-<img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="364" style="float:left" alt="Scope tree">
-<img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="364" style="float:right;" alt="Scope tree">
+First Header  | Second Header
+------------- | -------------
+![](http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif)  | ![](http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif)
+
+<img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="Scope tree">
+<img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="360" alt="Scope tree">
 
 
 
