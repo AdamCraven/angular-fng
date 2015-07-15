@@ -2,6 +2,12 @@
 
 Faster angular events mimic the functionality of the existing ng-event directives, but have a feature that allows them to be called in a desired scope, rather than trigger a rootScope digest.
 
+
+<img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" alt="Scope tree">
+<img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" alt="Scope tree">
+
+
+
 ## Usage
 
 Add $stopDigestPropagation to a scope to prevent rootscope digest
