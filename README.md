@@ -1,6 +1,6 @@
-#fng-event-directives for Angular
+#angular-fng Faster event directives for Angular
 
-Faster event directives (fng) have the same functionality existing ng-event directives (e.g. ng-click, ng-mousedown), but can be called in a desired scope instead of triggering a global, root scope, digest.
+angular-fng are performance focused event directives, that have the same functionality existing ng-event directives (e.g. ng-click, ng-mousedown), but can be called in a desired scope instead of triggering a global, root scope, digest.
 
 They can be used as a replacement or in addition to the default directives.
 
@@ -9,7 +9,7 @@ They can be used as a replacement or in addition to the default directives.
 
 ## Usage
 
-Add $stopDigestPropagation to a scope to prevent rootscope digest
+Add $stopDigestPropagation = true to a scope to prevent rootscope digest
 
 <img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
 <img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
