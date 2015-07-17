@@ -1,0 +1,17 @@
+{
+    "name": "angular-fng",
+    "description": "",
+    "author": "Adam Craven",
+    "license": "MIT",
+    "homepage": "https://github.com/AdamCraven/angular-fng",
+    "main": "./angular-fng.js",
+    "ignore": [
+    ],
+    "dependencies": {
+        "angular": ">=1.2.0 <2.0",
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/AdamCraven/angular-fng.git"
+    }
+}

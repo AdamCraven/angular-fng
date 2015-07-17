@@ -5,7 +5,7 @@ angular-fng are performance focused event directives, which behave as the standa
 
 They can be used as a replacement or in addition to the default directives.
 
-Example: Simulated large app (Greater 1000 watchers)
+Example: Simulated large app (Greater than 1000 watchers)
 <img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
 <img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="360" alt="fng-event">
 
