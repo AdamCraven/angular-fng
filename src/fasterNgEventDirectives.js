@@ -1,18 +1,21 @@
 /*jshint unused:true*/
-define(['angular'], function(angular) {
+(function () {
     'use strict';
 
+    // Refer to https://github.com/angular/angular.js/blob/master/src/ng/directive/ngEventDirs.js
+    // and angular code base for much of the originating source code.
+    // There are many private methods in angular, duplication has been necessary.
+
     var PREFIX_REGEXP = /^((?:x|data)[\:\-_])/i;
+    var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+
     /**
      * Converts all accepted directives format into proper directive name.
      * @param name Name to normalize
      */
-    //FIXME: Use https://docs.angularjs.org/api/ng/type/$compile.directive.Attributes if accessible
     function directiveNormalize(name) {
         return camelCase(name.replace(PREFIX_REGEXP, ''));
     }
-
-    var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 
     /**
      * Converts snake_case to camelCase.
@@ -26,6 +29,11 @@ define(['angular'], function(angular) {
         });
     }
 
+    /**
+     * Bubbles up the scope tree to check if digest stopDigestPropagation is set on scope
+     * returns that scope if defined otherwise rootscope
+     * @param {object} scope Where scope originated
+     */
     function scopeToCallDigestIn(scope) {
         var digestScope = scope;
         while (digestScope.$parent) {
@@ -46,10 +54,13 @@ define(['angular'], function(angular) {
     };
     var events = 'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste'.split(' ');
 
-    return function fasterNgDirectives(module) {
+    function fng(angular) {
+
+        var fngModule = angular.module('fng', []);
+
         function assignDirectives(eventName) {
             var directiveName = directiveNormalize('fng-' + eventName);
-            module.directive(directiveName, ['$parse', '$rootScope', function($parse, $rootScope) {
+            fngModule.directive(directiveName, ['$parse', '$rootScope', function($parse, $rootScope) {
                 return {
                     restrict: 'A',
                     compile: function($element, attr) {
@@ -60,13 +71,12 @@ define(['angular'], function(angular) {
                         var fn = $parse(attr[directiveName], /* interceptorFn */ null, /* expensiveChecks */ true);
                         return function ngEventHandler(scope, element) {
                             element.on(eventName, function(event) {
+                                var digestScope = scopeToCallDigestIn(scope);
                                 var callback = function() {
                                     fn(scope, {
                                         $event: event
                                     });
                                 };
-
-                                var digestScope = scopeToCallDigestIn(scope);
 
                                 if (forceAsyncEvents[eventName] && $rootScope.$$phase) {
                                     scope.$evalAsync(callback);
@@ -84,7 +94,16 @@ define(['angular'], function(angular) {
                 };
             }]);
         }
-
         events.forEach(assignDirectives);
-    };
-});
+    }
+
+    if (typeof define === 'function' && define.amd) {
+        define(['angular'], fng);
+    } else if (typeof module !== 'undefined' && module && module.exports) {
+        fng(angular);
+        module.exports = 'fng';
+    } else {
+        fng(angular);
+    }
+
+})();

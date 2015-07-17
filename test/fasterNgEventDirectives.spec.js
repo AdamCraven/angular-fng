@@ -2,20 +2,13 @@ define(['angular', 'angular-mocks', 'src/fasterNgEventDirectives'], function(ang
     'use strict';
 
 
-    describe('standard angular tests for event directives', function() {
-        var element;
-
-
-        afterEach(function() {
-            //dealoc(element);
-        });
-
         beforeEach(function() {
-            var mod = angular.module('fng', []);
-            fasterNgEventDirectives(mod);
             module('fng');
         });
 
+
+    describe('standard angular tests for event directives', function() {
+        var element;
 
         describe('fngSubmit', function() {
 
@@ -162,14 +155,8 @@ define(['angular', 'angular-mocks', 'src/fasterNgEventDirectives'], function(ang
         });
     });
 
-    describe('fng scope tests', function() {
+    describe('fng scope propagation tests', function() {
         var element;
-
-        beforeEach(function() {
-            var mod = angular.module('fng', []);
-            fasterNgEventDirectives(mod);
-            module('fng');
-        });
 
         describe('click', function() {
 
