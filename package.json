@@ -1,13 +1,13 @@
 {
-  "name": "fasterNgEventDirectives",
+  "name": "angular-fng",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/angular-fng.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "angular": "1.4.0",
     "jquery": "^2.1.4"

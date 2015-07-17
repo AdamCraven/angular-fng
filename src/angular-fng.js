@@ -1,5 +1,5 @@
 /*jshint unused:true*/
-(function () {
+(function() {
     'use strict';
 
     // Refer to https://github.com/angular/angular.js/blob/master/src/ng/directive/ngEventDirs.js

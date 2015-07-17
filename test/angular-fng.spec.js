@@ -1,11 +1,9 @@
-define(['angular', 'angular-mocks', 'src/fasterNgEventDirectives'], function(angular, angularMocks, fasterNgEventDirectives) {
+define(['angular', 'angular-mocks', 'src/angular-fng'], function(angular, angularMocks) {
     'use strict';
 
-
-        beforeEach(function() {
-            module('fng');
-        });
-
+    beforeEach(function() {
+        module('fng');
+    });
 
     describe('standard angular tests for event directives', function() {
         var element;
