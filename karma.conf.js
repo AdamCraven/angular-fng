@@ -19,7 +19,7 @@ module.exports = function(config) {
       {pattern: 'node_modules/angular-mocks/angular-mocks.js', included: false},
       {pattern: 'node_modules/jquery/dist/jquery.min.js', included: false},
       {pattern: 'test/*.spec.js', included: false},
-      {pattern: 'src/*.js', included: false},
+      {pattern: 'angular-fng.js', included: false},
       'test/test-main.js',
     ],
 

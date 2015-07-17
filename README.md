@@ -1,6 +1,6 @@
 #angular-fng Faster event directives for Angular
 
-angular-fng are performance focused event directives, which behaviour as the ng-event directives (e.g. ng-click, ng-mousedown), but can be called in a desired scope instead of triggering a global, root scope, digest.
+angular-fng are performance focused event directives, which behave as the ng-event directives (e.g. ng-click, ng-mousedown), but can be called in a desired scope instead of triggering a global, root scope, digest.
 
 They can be used as a replacement or in addition to the default directives.
 

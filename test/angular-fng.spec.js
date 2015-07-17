@@ -1,4 +1,4 @@
-define(['angular', 'angular-mocks', 'src/angular-fng'], function(angular, angularMocks) {
+define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angularMocks, angularFng) {
     'use strict';
 
     beforeEach(function() {
