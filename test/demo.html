@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>angular fng demo</title>
+    <script src='./node_modules/angular/angular.js'></script>
+    <script src="./angular-fng.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body>
+
+<test-directive></test-directive>
+
+
+<style>.pad {padding:15px; margin: 40px;}</style>
+<script id="fng.html" type="text/ng-template">
+    <div class="pad">
+        <span class="label label-danger">ng-event</span>
+        &nbsp;&nbsp;
+        <input ng-click="ctrl.focus()" ng-blur="ctrl.blur()" ng-keypress="ctrl.keypress()" ng-keyup="ctrl.keyup()" ng-keydown="ctrl.keydown()" />
+        <br /><br />
+
+
+        <span class="label label-success">fng-event</span>
+        &nbsp;
+        <input fng-click="ctrl.focus()" fng-blur="ctrl.blur()" fng-keypress="ctrl.keypress()" fng-keyup="ctrl.keyup()" fng-keydown="ctrl.keydown()" />
+    </div>
+</script>
+    <script>
+        var am = angular.module('app', ['app5', 'fng'])
+            .config(['$controllerProvider', function($controllerProvider) {
+                $controllerProvider.allowGlobals();
+            }])
+            .directive('testDirective', function () {
+                return {
+                    transclude:true,
+                    scope:{},
+                    link: function (scope) {
+                        scope.$stopDigestPropagation = true;
+                    },
+                    templateUrl: 'fng.html',
+                };
+            });
+
+
+        angular
+        .module("app5",[])
+        .run(["$rootScope", function(scope) {
+            "use strict";
+
+            scope.simulatedWatcher = function simulatedWatcher(x) {
+                var a = window.performance.now();
+                var b = window.performance.now();
+                return;
+            };
+            function noop () {}
+
+            for (var i = 0; i < 50000; i ++) {
+                // scope with 50000 watchers on it.
+                // This is more than most large angular apps.
+                // However, larger angular apps have complex views and styles to refresh (rendering and layout time) and watchers that vary in their efficiency.
+                // This demo gives a rough approximation of real world performance for a large angular app.
+                scope.$watch('simulatedWatcher()', noop);
+            }
+        }]);
+
+
+        angular.bootstrap(document, ['app']);
+    </script>
+</body>
+</html>
