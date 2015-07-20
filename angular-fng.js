@@ -1,4 +1,4 @@
-/*jshint unused:true*/
+// Angular fng / MIT License
 (function() {
     'use strict';
 
