@@ -5,6 +5,27 @@ angular-fng are performance focused event directives, which behave as the standa
 
 They can be used as a replacement or in addition to the default directives.
 
+New directives defined:
+
+* fng-click
+* fng-dblclick
+* fng-mousedown
+* fng-mouseup
+* fng-mouseover
+* fng-mouseout
+* fng-mousemove
+* fng-mouseenter
+* fng-mouseleave
+* fng-keydown
+* fng-keyup
+* fng-keypress
+* fng-submit
+* fng-focus
+* fng-blur
+* fng-copy
+* fng-cut
+* fng-paste
+
 Example: Simulated large app (Greater than 1000 watchers)
 <img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
 <img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="360" alt="fng-event">
@@ -17,8 +38,7 @@ LEFT: Using ng-event. RIGHT: Using fng-event, not refreshing all the watchers in
 * npm: `npm install angular-fng --save`
 * Or download from github: [angular-moment.zip](https://github.com/AdamCraven/angular-fng/archive/master.zip)
 
-
-Include angular-fng after angular.js
+Include angular-fng after angular.js has been loaded.
 
 ```html
 <script src="components/angular-fng/angular-fng.js"></script>
@@ -46,28 +66,30 @@ Then replace all uses of the ng-event directives with fng:
 ```
 
 
+### How it works
 
-<img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
-<img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
+The fng are opt-in directives, they behave *the same* as an ng event directive. But it differs in one important way. When triggered (e.g. fng-click) it bubbles up the scope tree and searches for a defined $stopDigestPropagation property.
+
+When found it will call a $digest in the scope where $stopDigestPropagation is set and checks all the child scopes as shown below:
+
+<figure class="half">
+    <img src="{{ site.url }}/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
+    <img src="{{ site.url }}/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
+</figure>
+
+<br />
+
+If $stopDigestPropagation property isn't found, it will fallback to the default behaviour and act **the same** as the ng-event directives, calling a root scope digest:
+
+<figure class="half">
+    <img src="{{ site.url }}/images/fng-directives/scope-tree.gif" alt="Scope tree local">
+    <img src="{{ site.url }}/images/fng-directives/scope-full-digest.gif" alt="Scope tree">
+</figure>
+
+Because they work the same as the existing ng-event directives, they can be dropped in and used as a replacement.
+That means all ng-keydowns can be converted to fng-keydowns, and so forth.
 
 
-New directives defined:
+###How to chose where to digest
 
-* fng-click
-* fng-dblclick
-* fng-mousedown
-* fng-mouseup
-* fng-mouseover
-* fng-mouseout
-* fng-mousemove
-* fng-mouseenter
-* fng-mouseleave
-* fng-keydown
-* fng-keyup
-* fng-keypress
-* fng-submit
-* fng-focus
-* fng-blur
-* fng-copy
-* fng-cut
-* fng-paste
+It is not recommended that these are used at low levels, such as in individual components. The live search component mentioned before would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
