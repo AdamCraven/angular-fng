@@ -3,7 +3,7 @@
 
 ---
 
-angular-fng (faster angular) are performance focused event directives, which behave as the standard ng-event directives (e.g. ng-click, ng-mousedown), but can trigger a partial scope digest instead of always triggering a global root scope digest.
+angular-fng (faster angular) are performance focused event directives, which behave the same as the ng-event directives (e.g. ng-click, ng-mousedown, etc..). But instead of always triggering a global root scope digest, angular-fng can trigger a partial (or local) scope digest, reducing app refreshes and increasing performance.
 
 Example: Simulated large app (Greater than 1000 watchers)
 <img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
@@ -35,6 +35,10 @@ New directives defined, which can be used as a replacement or in addition to the
 ## Why
 
 Not sure what's it all about? Have a read here: http://www.adamcraven.me/increasing-performance-on-large-angular-apps/
+
+## Requirements
+
+* Angular 1.2.0 or greater - May work on older versions.
 
 ## Installation
 
@@ -68,8 +72,6 @@ Then replace all uses of the ng-event directives with fng:
 ```html
 <a fng-click="ctrl.click()">Click Me</a>
 ```
-
-
 
 ### How it works
 
