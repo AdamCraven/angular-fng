@@ -78,8 +78,8 @@ The fng events are opt-in directives, which behave *the same* as an ng event dir
 When found it will call a $digest in the scope where $stopDigestPropagation is set and checks all the child scopes as shown below:
 
 <figure class="half">
-    <img src="{{ site.url }}/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
-    <img src="{{ site.url }}/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
+    <img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
+    <img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
 </figure>
 
 <br />
@@ -87,8 +87,8 @@ When found it will call a $digest in the scope where $stopDigestPropagation is s
 If $stopDigestPropagation property isn't found, it will fallback to the default behaviour and act **the same** as the ng-event directives, calling a root scope digest:
 
 <figure class="half">
-    <img src="{{ site.url }}/images/fng-directives/scope-tree.gif" alt="Scope tree local">
-    <img src="{{ site.url }}/images/fng-directives/scope-full-digest.gif" alt="Scope tree">
+    <img src="http://www.adamcraven.me/images/fng-directives/scope-tree.gif" alt="Scope tree local">
+    <img src="http://www.adamcraven.me/images/fng-directives/scope-full-digest.gif" alt="Scope tree">
 </figure>
 
 Because they work the same as the existing ng-event directives, they can be dropped in and used as a replacement.
