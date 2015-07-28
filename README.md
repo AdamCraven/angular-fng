@@ -1,7 +1,7 @@
 
-#angular-fng
+# angular-fng (**F**aster a**NG**ular)
 
-angular-fng (faster angular) are performance focused event directives, which behave the same as the ng-event directives (e.g. ng-click, ng-mousedown, etc..). But instead of always triggering a global root scope digest, angular-fng can trigger a partial (or local) scope digest, reducing app refreshes and increasing performance.
+Performance focused event directives, that act the same as the ng-event directives (ng-click, ng-mousedown, etc.). But instead of triggering a global root scope digest, it can trigger a partial (or local) scope digest, increasing performance and responsiveness.
 
 Example: Simulated large app (Greater than 1000 watchers)
 <img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
@@ -32,7 +32,7 @@ New directives defined, which can be used as a replacement or in addition to the
 
 ## Why
 
-Not sure what's it all about? Have a read here: http://www.adamcraven.me/increasing-performance-on-large-angular-apps/
+Not sure what's it all about? Have a read of: [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](http://www.adamcraven.me/increasing-performance-on-large-angular-apps/)
 
 ## Requirements
 
@@ -54,22 +54,24 @@ Or can be required in via require.js or other module loaders which support Commo
 
 ## Usage
 
-To enable add fng module your apps main module:
+To enable add fng to your main module:
 
 ```js
 angular.module('myApp', ['fng'])
 ```
 
-Enable by setting on your chosen module's scope:
+Enable partial digesting by setting $stopDigestPropagation on your chosen scope:
 
 ```js
-$scope.$stopDigestPropagation = true
+$chosenScope.$stopDigestPropagation = true
 ```
 
 Then replace all uses of the ng-event directives with fng:
 ```html
 <a fng-click="ctrl.click()">Click Me</a>
 ```
+
+When clicked, the digest will occur from the $chosenScope.
 
 ### How it works
 
@@ -95,6 +97,6 @@ Because they work the same as the existing ng-event directives, they can be drop
 That means all ng-keydowns can be converted to fng-keydowns, and so forth.
 
 
-###How to chose where to digest
+### How to chose where to digest
 
 It is not recommended that these are used at low levels, such as in individual components. The live search component mentioned before would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
