@@ -4,8 +4,10 @@
 Performance focused event directives, that act the same as the ng-event directives (ng-click, ng-mousedown, etc.). But instead of triggering a global root scope digest, it can trigger a partial (or local) scope digest, increasing performance and responsiveness.
 
 Example: Simulated large app (Greater than 1000 watchers)
+
 <img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
 <img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="360" alt="fng-event">
+
 LEFT: Using ng-event. RIGHT: Using fng-event, not refreshing all the watchers in an app.
 
 New directives defined, which can be used as a replacement or in addition to the default directives:
