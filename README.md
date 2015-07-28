@@ -1,7 +1,7 @@
 
 # angular-fng (**F**aster a**NG**ular)
 
-Performance focused event directives, that act the same as the ng-event directives (ng-click, ng-mousedown, etc.). But instead of triggering a global root scope digest, it can trigger a partial (or local) scope digest, increasing performance and responsiveness.
+Performance focused event directives, that act the same as the ng-event directives (ng-click, ng-mousedown, etc.). But instead of triggering a global root scope digest, it can trigger a partial scope digest, increasing performance and responsiveness.
 
 Example: Simulated large app (Greater than 1000 watchers)
 
