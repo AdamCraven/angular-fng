@@ -101,4 +101,4 @@ That means all ng-keydowns can be converted to fng-keydowns, and so forth.
 
 ### How to chose where to digest
 
-It is not recommended that these are used at low levels, such as in individual components. The live search component mentioned before would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
+It is not recommended that these are used at low levels, such as in individual components. The live search component, mentioned in [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](http://www.adamcraven.me/increasing-performance-on-large-angular-apps/), would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
