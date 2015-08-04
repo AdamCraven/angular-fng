@@ -160,6 +160,7 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
 
             var root, child, grandChild, greatGrandChild;
             var childCalled, rootCalled, grandChildCalled, greatGrandChildCalled;
+            var rootScopeApplySpy;
 
             beforeEach(inject(function($rootScope) {
                 root = $rootScope;
@@ -171,6 +172,8 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
                 greatGrandChildCalled = jasmine.createSpy('greatGrandChildCalled');
                 childCalled = jasmine.createSpy('childCalled');
                 rootCalled = jasmine.createSpy('rootCalled');
+
+                rootScopeApplySpy = spyOn($rootScope, '$apply').andCallThrough();
 
                 root.$watch(rootCalled);
                 child.$watch(childCalled);
@@ -186,7 +189,7 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
                 expect(childCalled).toHaveBeenCalled();
                 expect(grandChildCalled).toHaveBeenCalled();
                 expect(greatGrandChildCalled).toHaveBeenCalled();
-
+                expect(rootScopeApplySpy).toHaveBeenCalled();
             }));
 
             it('when $stopDigestPropagation is set to child, should call there and children', inject(function($compile) {
@@ -198,6 +201,7 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
                 expect(childCalled).toHaveBeenCalled();
                 expect(grandChildCalled).toHaveBeenCalled();
                 expect(greatGrandChildCalled).toHaveBeenCalled();
+                expect(rootScopeApplySpy).not.toHaveBeenCalled();
             }));
             it('when $stopDigestPropagation is set to grandChild, should call there and children', inject(function($compile) {
                 element = $compile('<a fng-click="te()"></a>')(grandChild);
@@ -208,6 +212,7 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
                 expect(childCalled).not.toHaveBeenCalled();
                 expect(grandChildCalled).toHaveBeenCalled();
                 expect(greatGrandChildCalled).toHaveBeenCalled();
+                expect(rootScopeApplySpy).not.toHaveBeenCalled();
             }));
 
             it('when $stopDigestPropagation is set to greatGrandChild, should call there', inject(function($compile) {
@@ -219,6 +224,7 @@ define(['angular', 'angular-mocks', '../angular-fng.js'], function(angular, angu
                 expect(childCalled).not.toHaveBeenCalled();
                 expect(grandChildCalled).not.toHaveBeenCalled();
                 expect(greatGrandChildCalled).toHaveBeenCalled();
+                expect(rootScopeApplySpy).not.toHaveBeenCalled();
             }));
 
             describe('call the listener asynchronously during $apply, fallback to standard digest', function() {

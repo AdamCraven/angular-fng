@@ -30,15 +30,27 @@
     }
 
     /**
-     * Bubbles up the scope tree recursively to check if digest stopDigestPropagation is set on scope
-     * returns that scope if defined otherwise rootscope
+     * Bubbles up the scope tree recursively to check if stopDigestPropagation is set on scope
+     * returns that scope if defined otherwise undefined
      * @param {object} scope Where scope originated
+     * @return {object} Scope to partial digest in or undefined
      */
-    function scopeToCallDigestIn(scope) {
-        if(!scope.$parent || scope.hasOwnProperty('$stopDigestPropagation')) {
+    function findPartialScope(scope) {
+        if (scope.hasOwnProperty('$stopDigestPropagation')) {
             return scope;
+        } else if (scope.$parent) {
+            return findPartialScope(scope.$parent);
         }
-        return scopeToCallDigestIn(scope.$parent);
+        return;
+    }
+
+    function partialDigest(scope, callback) {
+        callback();
+        scope.$digest();
+    }
+
+    function fullDigest (scope, callback) {
+        scope.$apply(callback);
     }
 
     // For events that might fire synchronously during DOM manipulation
@@ -51,7 +63,6 @@
     var events = 'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste'.split(' ');
 
     function fng(angular) {
-
         var fngModule = angular.module('fng', []);
 
         function assignDirectives(eventName) {
@@ -66,8 +77,8 @@
                         // frequently as regular change detection.
                         var fn = $parse(attr[directiveName], /* interceptorFn */ null, /* expensiveChecks */ true);
                         return function ngEventHandler(scope, element) {
-                            element.on(eventName, function(event) {
-                                var digestScope = scopeToCallDigestIn(scope);
+                            element.on(eventName, function fngEventHandler(event) {
+                                var partialDigestScope;
                                 var callback = function() {
                                     fn(scope, {
                                         $event: event
@@ -76,13 +87,10 @@
 
                                 if (forceAsyncEvents[eventName] && $rootScope.$$phase) {
                                     scope.$evalAsync(callback);
+                                } else if ((partialDigestScope = findPartialScope(scope))) {
+                                    partialDigest(partialDigestScope, callback);
                                 } else {
-                                    if (digestScope.$stopDigestPropagation) {
-                                        callback();
-                                        digestScope.$digest();
-                                    } else {
-                                        scope.$apply(callback);
-                                    }
+                                    fullDigest(scope, callback);
                                 }
                             });
                         };
