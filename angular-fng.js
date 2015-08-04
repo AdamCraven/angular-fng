@@ -30,19 +30,15 @@
     }
 
     /**
-     * Bubbles up the scope tree to check if digest stopDigestPropagation is set on scope
+     * Bubbles up the scope tree recursively to check if digest stopDigestPropagation is set on scope
      * returns that scope if defined otherwise rootscope
      * @param {object} scope Where scope originated
      */
     function scopeToCallDigestIn(scope) {
-        var digestScope = scope;
-        while (digestScope.$parent) {
-            if (digestScope.hasOwnProperty('$stopDigestPropagation')) {
-                break;
-            }
-            digestScope = digestScope.$parent;
+        if(!scope.$parent || scope.hasOwnProperty('$stopDigestPropagation')) {
+            return scope;
         }
-        return digestScope;
+        return scopeToCallDigestIn(scope.$parent);
     }
 
     // For events that might fire synchronously during DOM manipulation
