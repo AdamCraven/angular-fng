@@ -1,6 +1,6 @@
 {
   "name": "angular-fng",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Performance focused event directives, that act the same as the ng-event directives (ng-click, ng-mousedown, etc.). But instead of triggering a global root scope digest, it can trigger a partial scope digest, increasing performance and responsiveness.",
   "main": "angular-fng.js",
   "scripts": {
