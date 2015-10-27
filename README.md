@@ -44,7 +44,7 @@ Not sure what's it all about? Have a read of: [angular-fng - Improve the perform
 
 * bower: `bower install angular-fng --save`
 * npm: `npm install angular-fng --save`
-* Or download from github: [angular-moment.zip](https://github.com/AdamCraven/angular-fng/archive/master.zip)
+* Or download from github: [angular-fng.zip](https://github.com/AdamCraven/angular-fng/archive/master.zip)
 
 Include angular-fng after angular.js has been loaded.
 
