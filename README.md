@@ -5,8 +5,8 @@ Performance focused event directives, that act the same as the ng-event directiv
 
 Example: Simulated large app (Greater than 1000 watchers)
 
-<img src="http://www.adamcraven.me/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
-<img src="http://www.adamcraven.me/images/fng-directives/fng-event-anim.gif" width="360" alt="fng-event">
+<img src="https://code.adamcrvn.com/images/fng-directives/ng-event-anim.gif" width="360" alt="ng-event">
+<img src="https://code.adamcrvn.com/images/fng-directives/fng-event-anim.gif" width="360" alt="fng-event">
 
 LEFT: Using ng-event. RIGHT: Using fng-event, not refreshing all the watchers in an app.
 
@@ -34,7 +34,7 @@ New directives defined, which can be used as a replacement or in addition to the
 
 ## Why
 
-Not sure what's it all about? Have a read of: [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](http://www.adamcraven.me/increasing-performance-on-large-angular-apps/)
+Not sure what's it all about? Have a read of: [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](https://code.adamcrvn.com/increasing-performance-on-large-angular-apps/)
 
 ## Requirements
 
@@ -82,8 +82,8 @@ The fng events are opt-in directives, which behave *the same* as an ng event dir
 When found it will call a $digest in the scope where $stopDigestPropagation is set and checks all the child scopes as shown below:
 
 <figure class="half">
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
+    <img src="https://code.adamcrvn.com/images/fng-directives/scope-tree-local.gif" alt="Scope tree local">
+    <img src="https://code.adamcrvn.com/images/fng-directives/scope-local-digest.gif" alt="Scope tree">
 </figure>
 
 <br />
@@ -91,8 +91,8 @@ When found it will call a $digest in the scope where $stopDigestPropagation is s
 If $stopDigestPropagation property isn't found, it will fallback to the default behaviour and act **the same** as the ng-event directives, calling a root scope digest:
 
 <figure class="half">
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-tree.gif" alt="Scope tree local">
-    <img src="http://www.adamcraven.me/images/fng-directives/scope-full-digest.gif" alt="Scope tree">
+    <img src="https://code.adamcrvn.com/images/fng-directives/scope-tree.gif" alt="Scope tree local">
+    <img src="https://code.adamcrvn.com/images/fng-directives/scope-full-digest.gif" alt="Scope tree">
 </figure>
 
 Because they work the same as the existing ng-event directives, they can be dropped in and used as a replacement.
@@ -101,4 +101,4 @@ That means all ng-keydowns can be converted to fng-keydowns, and so forth.
 
 ### How to chose where to digest
 
-It is not recommended that these are used at low levels, such as in individual components. The live search component, mentioned in [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](http://www.adamcraven.me/increasing-performance-on-large-angular-apps/), would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
+It is not recommended that these are used at low levels, such as in individual components. The live search component, mentioned in [angular-fng - Improve the performance of large angular 1.x apps, by using faster event directives](https://code.adamcrvn.com/increasing-performance-on-large-angular-apps/), would not implement $stopDigestPropagation property. It should be implemented at the module level, or higher. Such as a group of modules that relate to a major aspect of functionality on a page.
